@@ -1,17 +1,26 @@
-# Project A: D455 RGB-D Preview
+# 课题 A：D455 RGB-D 与人脸分析
 
-## Run
+## 运行方法
 
-Use the local `realsense_a` Conda interpreter in PyCharm, connect the D455 to a USB 3 port, then run:
+在 PyCharm 中使用本地 `realsense` 环境的解释器（`C:\Users\14010\Anaconda3\envs\realsense\python.exe`），
+把 D455 连接到 USB 3 接口，然后运行：
 
 ```powershell
 python preview_rgbd.py
 ```
 
-The left panel is the color image. The right panel is the aligned pseudo-color depth image. The green dot marks the center pixel and displays its distance in meters. The frame rate is shown in the upper-left corner.
+左侧画面是彩色图像，右侧是与彩色对齐后的伪彩色深度图。程序还会检测一张人脸、
+统计眨眼次数、估计头部俯仰角（pitch），并比较鼻尖与脸颊的深度，完成一个简单的
+活体判断演示。
 
-Press `S` to save the current color image, raw 16-bit depth image, and side-by-side preview in `captures/`. Press `Q` or `Esc` to close the preview.
+正对相机时按 `N` 键，即可校准正常的头部姿态。按 `S` 键会把当前彩色图、16 位原始
+深度图和左右拼接预览图保存到 `captures/` 目录。按 `Q` 或 `Esc` 关闭预览窗口。
 
-## Before Running
+活体判断结果只是课堂演示，并非安全级别的防伪系统。程序把面部区域的深度拟合成
+一个平面，再统计各点相对该平面的起伏：真人鼻尖明显凸出（约 2~5 厘米），平面
+照片的起伏只有毫米级；手机/屏幕照片几乎不反射红外光、取不到深度，同样判为
+照片。先拟合平面可以抵消低头、仰头、照片倾斜带来的影响。
 
-Close Intel RealSense Viewer before running this program, because only one program can use the camera at a time.
+## 运行前注意
+
+运行本程序前请先关闭 Intel RealSense Viewer，因为同一时间只能有一个程序占用相机。
