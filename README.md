@@ -5,7 +5,7 @@
 在 PyCharm 中使用本地 `realsense` 环境的解释器（`C:\Users\14010\Anaconda3\envs\realsense\python.exe`），
 把 D455 连接到 USB 3 接口，然后运行：
 
-```powershell
+```powershell --
 python preview_rgbd.py
 ```
 
